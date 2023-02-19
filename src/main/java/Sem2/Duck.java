@@ -1,6 +1,6 @@
 package Sem2;
 
-public class Duck extends Herbivore implements Flyable, Runnable {
+public class Duck extends Herbivore implements Flyable, Runnable, Swimmable {
 
     public Duck(String nickname) {
         super(nickname);
@@ -8,7 +8,7 @@ public class Duck extends Herbivore implements Flyable, Runnable {
 
     @Override
     public String toString() {
-        return "I'm duck. " + super.toString() + ". My fly speed is " + getSpeedOfFly() + ". My walk speed is " + getSpeedOfRun();
+        return "I'm duck. " + super.toString() + ". My walk speed is " + getSpeedOfRun() + ". My fly speed is " + getSpeedOfFly() + ". My swim speed is " + getSpeedOfSwim();
     }
 
     @Override
@@ -25,5 +25,10 @@ public class Duck extends Herbivore implements Flyable, Runnable {
     @Override
     public int getSpeedOfRun() {
         return 3;
+    }
+
+    @Override
+    public int getSpeedOfSwim() {
+        return 7;
     }
 }
