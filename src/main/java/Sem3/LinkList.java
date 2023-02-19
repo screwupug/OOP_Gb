@@ -81,11 +81,11 @@ public class LinkList implements Iterable<LinkList.Node> {
     }
 
     protected static class Node {
-        Node next;
-        Node previous;
-        int value;
+        private Node next;
+        private Node previous;
+        private int value;
 
-        public Node(int value) {
+        private Node(int value) {
             this.value = value;
         }
 
@@ -94,7 +94,7 @@ public class LinkList implements Iterable<LinkList.Node> {
             return String.valueOf(value);
         }
 
-        public int getValue() {
+        private int getValue() {
             return value;
         }
     }
