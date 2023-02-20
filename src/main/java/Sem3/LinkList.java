@@ -1,12 +1,15 @@
 package sem3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class LinkList implements Iterable<LinkList.Node> {
-    private List<Node> chain = new ArrayList<>();
-    private int size;
+public class LinkList implements Iterable<Integer> {
+    private Node head;
+    private Node last;
+    private Node[] chain = new Node[11];
+    private int size = 0;
 
     private boolean checkIndex(int index) {
         return (index <= 0 && index >= size);
@@ -14,40 +17,46 @@ public class LinkList implements Iterable<LinkList.Node> {
 
     public void addElement(int value) {
         Node newNode = new Node(value);
-        if (chain.isEmpty()) {
-            chain.add(newNode);
+        Node temp = last;
+        last = newNode;
+        if (head == null) {
+            head = newNode;
         } else {
-            Node lastInChain = chain.get(chain.size() - 1);
-            lastInChain.next = newNode;
-            newNode.previous = lastInChain;
-            chain.add(newNode);
+            temp.next = newNode;
+            newNode.previous = temp;
         }
-        size++;
+        chain[size++] = newNode;
+        checkLength();
+    }
+
+    private void checkLength() {
+        if (size == chain.length / 2) {
+           chain = Arrays.copyOf(chain, chain.length + 11);
+        }
     }
 
     public int getElement(int index) {
        if (checkIndex(index)) {
           return -1;
        }
-       return chain.get(index).getValue();
+       return chain[index].value;
     }
 
     public boolean deleteElement(int index) {
-        if (checkIndex(index)) {
-            return false;
+        for (int i = 0; i < size; i++) {
+            if (i == index) {
+                Node nextElement = chain[i].next;
+                Node prevElement = chain[i].previous;
+                nextElement.previous = prevElement;
+                prevElement.next = nextElement;
+                int newSize = chain.length - 1;
+                System.arraycopy(chain, i + 1, chain, i, newSize - i);
+                chain[newSize] = null;
+                size--;
+                return true;
+            }
         }
-        Node elementToDelete = chain.get(index);
-        Node prevElement = elementToDelete.previous;
-        Node nextElement = elementToDelete.next;
-        if (prevElement != null) {
-            prevElement.next = nextElement;
-        }
-        if (nextElement != null) {
-            nextElement.previous = prevElement;
-        }
-        chain.remove(elementToDelete);
-        size--;
-        return true;
+        return false;
     }
 
     public int getSize() {
@@ -55,32 +64,34 @@ public class LinkList implements Iterable<LinkList.Node> {
     }
 
     public boolean showPrevAndNext(int index) {
-        if (checkIndex(index)) {
-            return false;
+        for (int i = 0; i <= size; i++) {
+            if (i == index) {
+                System.out.printf("Element - %s, previous - %s, next - %s\n", chain[i].value, chain[i].previous, chain[i].next);
+                return true;
+            }
         }
-        Node elementToShow = chain.get(index);
-        System.out.printf("Element - %s, previous - %s, next - %s\n", elementToShow, elementToShow.previous, elementToShow.next);
-        return true;
+        return false;
+
     }
 
     @Override
-    public Iterator<Node> iterator() {
+    public Iterator<Integer> iterator() {
         return new Iterator<>() {
             int count = 0;
 
             @Override
             public boolean hasNext() {
-                return count < chain.size();
+                return count < size;
             }
 
             @Override
-            public Node next() {
-                return chain.get(count++);
+            public Integer next() {
+                return chain[count++].value;
             }
         };
     }
 
-    protected static class Node {
+    private class Node {
         private Node next;
         private Node previous;
         private int value;
@@ -92,10 +103,6 @@ public class LinkList implements Iterable<LinkList.Node> {
         @Override
         public String toString() {
             return String.valueOf(value);
-        }
-
-        private int getValue() {
-            return value;
         }
     }
 }
