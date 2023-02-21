@@ -1,9 +1,7 @@
-package sem3;
+package Sem3;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 public class LinkList implements Iterable<Integer> {
     private Node head;
