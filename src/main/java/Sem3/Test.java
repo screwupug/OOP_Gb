@@ -1,4 +1,4 @@
-package sem3;
+package Sem3;
 public class Test {
     public static void main(String[] args) {
       LinkList list = new LinkList();
