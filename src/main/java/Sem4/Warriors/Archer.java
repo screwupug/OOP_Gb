@@ -1,7 +1,6 @@
 package Sem4.Warriors;
 
 import Sem4.Shields.Armor;
-import Sem4.Weapons.MeleeWeapon;
 import Sem4.Weapons.RangedWeapon;
 
 public class Archer extends Warrior<RangedWeapon, Armor> {

@@ -2,6 +2,7 @@ package Sem4.Shields;
 
 import Sem4.Protectable;
 
+// Abstract class for shields
 public abstract class Shield implements Protectable {
     private String type;
     private int durability;
@@ -16,6 +17,7 @@ public abstract class Shield implements Protectable {
         return durability;
     }
 
+    // Method to refresh durability after receiving damage
     public int refreshDurability(int damage) {
         if (durability == 0) return damage;
         int remainingDamage = 0;

@@ -1,11 +1,10 @@
 package Sem4.Warriors;
 
-import Sem4.Damageable;
 import Sem4.Shields.Shield;
 import Sem4.Weapons.Weapon;
-
 import java.util.Random;
 
+// Abstract class for Warriors
 public abstract class Warrior<W extends Weapon, S extends Shield> {
     private String name;
     private W weapon;
@@ -19,6 +18,7 @@ public abstract class Warrior<W extends Weapon, S extends Shield> {
         this.shield = shield;
     }
 
+    // Constructor for warriors without shield
     public Warrior(String name, int health, W weapon) {
         this.name = name;
         this.weapon = weapon;
@@ -53,6 +53,7 @@ public abstract class Warrior<W extends Weapon, S extends Shield> {
         return new Random().nextInt(weapon.damage());
     }
 
+    // Register damage
     public boolean hit(Warrior enemy) {
         int damage = damageFork();
         int remainingDamage = enemy.tryToProtectDamage(damage);
@@ -70,6 +71,7 @@ public abstract class Warrior<W extends Weapon, S extends Shield> {
         }
     }
 
+    // Checks out if shield can receive damage or not
     private int tryToProtectDamage(int damage) {
         if (shield == null) return damage;
         return shield.refreshDurability(damage);

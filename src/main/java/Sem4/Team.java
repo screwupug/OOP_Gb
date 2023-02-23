@@ -1,8 +1,6 @@
 package Sem4;
 
 import Sem4.Warriors.Warrior;
-import Sem4.Weapons.Weapon;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
