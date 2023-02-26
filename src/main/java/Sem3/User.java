@@ -1,4 +1,4 @@
-package sem3;
+package Sem3;
 
 public class User implements Comparable<User> {
    private String firstName;

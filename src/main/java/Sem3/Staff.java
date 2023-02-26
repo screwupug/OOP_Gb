@@ -1,4 +1,4 @@
-package sem3;
+package Sem3;
 
 import java.util.ArrayList;
 import java.util.Iterator;
